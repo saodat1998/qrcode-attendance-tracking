@@ -1,0 +1,143 @@
+<template>
+    <div>
+        <b-container class="pr-5">
+            <form class=" justify-content-center login" >
+                <fieldset>
+                  <div class="input">
+                      <label class="form-check-label" for="name">ID</label>
+                        <input type="text" required id="name"/>
+                        <span class="tiny"><font-awesome-icon icon="user"/></span>
+                  </div>
+                  <div class="input">
+                      <label class="form-check-label" for="password">Password</label>
+                    <input type="password" id="password"/>
+                    <span class="tiny"><font-awesome-icon icon="eye"/></span>
+                  </div>
+                    <button type="submit" class="submit"><font-awesome-icon icon="arrow-right"/></button>
+                </fieldset>
+            </form>
+        </b-container>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "Login",
+            data() {
+                return {
+                    form: {
+                        email: '',
+                        name: '',
+                        food: null,
+                        checked: []
+                    },
+                    foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+                    show: true
+                }
+            },
+            methods: {
+                onSubmit(evt) {
+                    evt.preventDefault();
+                    alert(JSON.stringify(this.form))
+                },
+                onReset(evt) {
+                    evt.preventDefault()
+                    // Reset our form values
+                    this.form.email = ''
+                    this.form.name = ''
+                    this.form.food = null
+                    this.form.checked = []
+                    // Trick to reset/clear native browser form validation state
+                    this.show = false
+                    this.$nextTick(() => {
+                        this.show = true
+                    })
+                }
+            }
+        }
+</script>
+
+<style scoped>
+    ::placeholder {
+        color: white;
+    }
+    .form-check-label{
+        font-size: 12px;
+        margin-left: 27px;
+        margin-top: 12px;
+        color: #ddc5ff;
+    }
+    .login{
+        position: absolute;
+        left: 30%;
+        width: 50%;
+        display: table;
+        background: rgba(200,200, 200, 0.15);
+        border-radius: 1px;
+    }
+    .input{
+        position: relative;
+        width: 90%;
+        margin: 10px auto;
+        color: white;
+        text-align: left;
+    }
+    span{
+        position: absolute;
+        display: block;
+        color: #fff;
+        left: 10px;
+        top: 36px;
+        font-size: 14px;
+    }
+
+    input{
+        width: 100%;
+        padding-left: 30px;
+        display: block;
+        border: none;
+        border-bottom: 1px solid #EDEDED;
+        border-radius: 4px;
+        transition: 0.2s ease-out;
+        color: #fff;
+        background-color: transparent;
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    .submit{
+        width: 45px;
+        height: 45px;
+        display: block;
+        margin: 0 auto -15px auto;
+        background: rgba(251, 249, 251, 0.72);
+        border-radius: 100%;
+        border: 1px solid #2285ba;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 0 0 7px rgba(251, 249, 251, 0.22);
+        transition: 0.2s ease-out;
+        color: #2285ba;
+
+    }
+    #tiny .fa{
+        display: block;
+        position: absolute;
+        font-size: 10px;
+        margin-bottom: 0;
+        bottom: -21px;
+    }
+
+    .submit:hover .fa-arrow-right {
+        -webkit-animation-name: buzz-out;
+        animation-name: buzz-out;
+        -webkit-animation-duration: 0.75s;
+        animation-duration: 0.75s;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+    }
+</style>

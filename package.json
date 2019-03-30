@@ -14,7 +14,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.16",
     "qrcode.vue": "^1.6.1",
-    "vue": "file:node_modules/vue"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

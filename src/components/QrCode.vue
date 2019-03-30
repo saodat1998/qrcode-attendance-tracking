@@ -19,33 +19,18 @@
         components: {
             QrcodeVue
         },
-        computed:{
-            changes : {
-                get : function(){
-                    return this.value;
-                },
-                set: function (v) {
-                    this.value = v;
-                }
-                }
-        },
-        mounted(){
-            this.sayHi();
-        },
-        beforeDestroy () {
-            clearInterval(this.intervalid1)
-        },
-        methods:{
-            sayHi: function () {
-                const v = this;
-                setTimeout(function () {
-                    v.changes = ((Math.random() * 100).toFixed(2))+'%';
-                    console.log(v.changes);
-                    }.bind(this), 3);
+        methods: {
+            systemPowerDown: function(){
+                this.value = 3232323 + ': Server Down';
             },
+            systemReset: function(){
+                this.message = this.server + ': Resetting';
+                setTimeout(function () {
+                    this.value = 222 + ': Reset'
+                    window.console.log(343);
+                }.bind(this))
+            }
         },
-
-
     }
 </script>
 <style>

@@ -20,17 +20,24 @@
             QrcodeVue
         },
         methods: {
-            systemPowerDown: function(){
-                this.value = 3232323 + ': Server Down';
-            },
-            systemReset: function(){
-                this.message = this.server + ': Resetting';
-                setTimeout(function () {
-                    this.value = 222 + ': Reset'
-                    window.console.log(343);
-                }.bind(this))
+            rndStr(len) {
+                let text = ' '
+                let chars = '1234567890abcdefghijklmnopqrstuvwxyz'
+
+                for( let i=0; i < len; i++ ) {
+                    text += chars.charAt(Math.floor(Math.random() * chars.length))
+                }
+
+                return text
             }
         },
+        mounted () {
+            setInterval(() => {
+                let value = this.rndStr(5)
+
+                this.value = value
+            }, 3000)
+        }
     }
 </script>
 <style>

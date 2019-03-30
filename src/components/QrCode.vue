@@ -1,7 +1,17 @@
 <template>
-    <div class="qr">
-        <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue>
-        {{value}}
+    <div>
+        <b-row>
+            <b-col>
+                <qrcode-vue :background="background" :value="value" :size="size" level="H"></qrcode-vue>
+            </b-col>
+            <b-col>
+
+            </b-col>
+            <b-col>
+
+            </b-col>
+        </b-row>
+
     </div>
 </template>
 <script>
@@ -9,11 +19,15 @@
 
     export default {
         name: 'QrCode',
+
         data() {
             return {
+                qrCls: 'qrcode',
                 value: 'https://example.com',
                 size: 400,
-                intervalid1:'',
+                background: '#E91E63',
+                minutes:0,
+                secondes:0
             }
         },
         components: {
@@ -21,21 +35,26 @@
         },
         methods: {
             rndStr(len) {
-                let text = ' '
-                let chars = '1234567890abcdefghijklmnopqrstuvwxyz'
-
+                let text = ' ';
+                let chars = '1234567890abcdefghijklmnopqrstuvwxyz';
                 for( let i=0; i < len; i++ ) {
-                    text += chars.charAt(Math.floor(Math.random() * chars.length))
+                    text += chars.charAt(Math.floor(Math.random() * chars.length));
                 }
-
                 return text
-            }
+            },
+            rndBg(){
+                let bg = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+                if(bg !== '#000000')
+                return bg;
+            },
+
         },
         mounted () {
             setInterval(() => {
-                let value = this.rndStr(5)
-
-                this.value = value
+                let b = this.rndBg();
+                let val = this.rndStr(5);
+                this.value = val;
+                this.background = b;
             }, 3000)
         }
     }

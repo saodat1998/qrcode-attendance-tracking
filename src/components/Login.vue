@@ -5,12 +5,12 @@
                 <fieldset>
                   <div class="input">
                       <label class="form-check-label" for="name">ID</label>
-                        <input type="text" required id="name"/>
+                        <input type="text" required v-model="user" id="name"/>
                         <span class="tiny"><font-awesome-icon icon="user"/></span>
                   </div>
                   <div class="input">
                       <label class="form-check-label" for="password">Password</label>
-                    <input type="password" id="password"/>
+                    <input type="password" v-model="password" id="password"/>
                     <span class="tiny"><font-awesome-icon icon="eye"/></span>
                   </div>
                     <button type="submit" class="submit"><font-awesome-icon icon="arrow-right"/></button>
@@ -25,34 +25,18 @@
         name: "Login",
             data() {
                 return {
-                    form: {
-                        email: '',
-                        name: '',
-                        food: null,
-                        checked: []
-                    },
-                    foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-                    show: true
+                    user: '',
+                    password: '',
+
                 }
             },
             methods: {
                 onSubmit(evt) {
                     evt.preventDefault();
-                    alert(JSON.stringify(this.form))
+                    alert(JSON.stringify(this.form));
+                    this.$router.replace(this.$route.query.redirect || '/home');
                 },
-                onReset(evt) {
-                    evt.preventDefault()
-                    // Reset our form values
-                    this.form.email = ''
-                    this.form.name = ''
-                    this.form.food = null
-                    this.form.checked = []
-                    // Trick to reset/clear native browser form validation state
-                    this.show = false
-                    this.$nextTick(() => {
-                        this.show = true
-                    })
-                }
+
             }
         }
 </script>

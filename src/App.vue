@@ -1,49 +1,38 @@
 <template>
   <div id="app">
-  <b-container fluid>
+    <b-container fluid>
     <b-row>
-
       <b-col md="4">
         <b-row>
           <b-col md="12">
             <Left></Left>
           </b-col>
-
           <b-col md="12">
             <Login></Login>
           </b-col>
         </b-row>
-
       </b-col>
-      <b-col md="8" class="pt-5">
-        <b-row>
-          <Right></Right>
-        </b-row>
-        <b-row class="pt-5">
-          <QrCode></QrCode>
-        </b-row>
+      <b-col md="8">
+
+    <router-view></router-view>
       </b-col>
     </b-row>
-  </b-container>
-
+    </b-container>
   </div>
+
 </template>
 
 <script>
-import Left from "@/components/Left";
-import Right from "@/components/Right";
-import Login from "@/components/Login";
-import QrCode from "@/components/QrCode";
 
+import Left from "./components/Left";
+import Login from "./components/Login";
 export default {
   name: 'app',
   components: {
-    QrCode,
     Login,
-    Right,
-    Left,
+    Left
 
-  }
+    }
 }
 </script>
 

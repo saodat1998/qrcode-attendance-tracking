@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Select from "./components/Select";
 import QrCode from "./components/QrCode";
+import Profile from "./components/Profile";
 
 
 
@@ -19,7 +20,11 @@ export default new VueRouter({
             name: 'navbar',
             component: Navbar
         },
-
+        {
+            path: '/',
+            name: 'profile',
+            component: Profile
+        },
         {
             path: '/select',
             name: 'select',

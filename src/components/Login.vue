@@ -1,53 +1,47 @@
 <template>
     <div>
+        <b-alert class="warn" variant="dark" v-if="error" show>
+            Invalid id or password
+        </b-alert>
         <b-container class="pr-5">
-            <form action="/select" class=" justify-content-center login" >
+
+            <form action="/select" @submit.prevent="check" class=" justify-content-center login" >
                 <fieldset>
                   <div class="input">
                       <label class="form-check-label" for="name">ID</label>
-                        <input type="text" required v-model="user" id="name"/>
+                        <input type="text" required :v-bind="user" v-model="user" id="name"/>
                         <span class="tiny"><font-awesome-icon icon="user"/></span>
                   </div>
                   <div class="input">
                       <label class="form-check-label" for="password">Password</label>
-                    <input type="password" v-model="password" id="password"/>
+                    <input type="password" :v-bind="password" v-model="password" id="password"/>
                     <span class="tiny"><font-awesome-icon icon="eye"/></span>
                   </div>
                     <button type="submit" class="submit"><font-awesome-icon icon="arrow-right"/></button>
                 </fieldset>
             </form>
+
                     </b-container>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Item Name</th>
-                <th>Item Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="item of items" :key="item['.key']">
-                <td>{{ items.id }}</td>
-                <td>{{ items.password }}</td>
 
-            </tr>
-            </tbody>
-        </table>
-
-    </div>
+           </div>
 </template>
 
 <script>
     import { db } from '../db';
+    import 'firebase/database';
 
     export default {
         name: "Login",
             data() {
                 return {
-                    user: '',
-                    password: '',
+                    user: null,
+                    password: null,
                     items:[],
+                    error: false,
+                    some: 0,
                 }
             },
+
             firebase: {
                 items: db.ref('users')
             },
@@ -55,14 +49,36 @@
                 onSubmit(evt) {
                     evt.preventDefault();
                     alert(JSON.stringify(this.form));
-                    // this.$router.replace(this.$route.query.redirect || '/home');
                 },
+                check(){
+                    let items = this.items;
+                    for(let i=0; i<items.length; i++){
+                        if((this.user === items[i].id) && (this.password === items[i].password)){
+                                this.error = false;
+                                this.$router.replace(this.$route.query.redirect || '/select');
+                                return 0;
+                        }
+                        else{
+                            this.error = true;
+                        }
+                    }
+
+                }
 
             }
         }
 </script>
 
 <style scoped>
+    .warn{
+        position: absolute;
+        left: 35%;
+        padding: 5px;
+        font-size: 12px;
+        color: red;
+        border: none;
+
+        }
     ::placeholder {
         color: white;
     }

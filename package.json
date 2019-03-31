@@ -13,10 +13,12 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.16",
+    "firebase": "^5.9.2",
     "qrcode.vue": "^1.6.1",
-    "vue": "^2.6.10",
     "vue-router": "^3.0.2",
-    "vue-timers": "^1.10.0"
+    "vue-timers": "^1.10.0",
+    "vuefire": "^1.4.5",
+    "vue": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

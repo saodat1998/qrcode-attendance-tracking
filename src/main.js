@@ -5,6 +5,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faEye, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueTimers from 'vue-timers'
+import VueFire from 'vuefire'
+
+Vue.use(VueFire);
 // import VueRouter from 'vue-router'
 //
 // Vue.use(VueRouter);

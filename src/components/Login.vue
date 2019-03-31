@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-container class="pr-5">
-            <form class=" justify-content-center login" >
+            <form action="/select" class=" justify-content-center login" >
                 <fieldset>
                   <div class="input">
                       <label class="form-check-label" for="name">ID</label>
@@ -16,25 +16,46 @@
                     <button type="submit" class="submit"><font-awesome-icon icon="arrow-right"/></button>
                 </fieldset>
             </form>
-        </b-container>
+                    </b-container>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="item of items" :key="item['.key']">
+                <td>{{ items.id }}</td>
+                <td>{{ items.password }}</td>
+
+            </tr>
+            </tbody>
+        </table>
+
     </div>
 </template>
 
 <script>
+    import { db } from '../db';
+
     export default {
         name: "Login",
             data() {
                 return {
                     user: '',
                     password: '',
-
+                    items:[],
                 }
+            },
+            firebase: {
+                items: db.ref('users')
             },
             methods: {
                 onSubmit(evt) {
                     evt.preventDefault();
                     alert(JSON.stringify(this.form));
-                    this.$router.replace(this.$route.query.redirect || '/home');
+                    // this.$router.replace(this.$route.query.redirect || '/home');
                 },
 
             }

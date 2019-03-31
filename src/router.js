@@ -21,7 +21,7 @@ export default new VueRouter({
         },
 
         {
-            path: '/',
+            path: '/select',
             name: 'select',
             component: Select
         },

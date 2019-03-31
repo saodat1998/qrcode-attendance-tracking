@@ -4,7 +4,7 @@
             <table class="border">
                 <tr>
                     <td><font-awesome-icon class="userIcon" icon="user"/></td>
-                    <td>{{user}}</td>
+                    <td>{{id}}</td>
                 </tr>
             </table>
 
@@ -16,6 +16,11 @@
 <script>
     export default {
         name: "Profile",
+        data(){
+            return {
+                id: this.$route.params.id,
+            }
+        },
         props:{
             user:{
                 id: String,

@@ -16,12 +16,12 @@ export default new VueRouter({
     base: process.env.BASE_URL,
     routes: [
         {
-            path: '/home',
+            path: '/',
             name: 'navbar',
             component: Navbar
         },
         {
-            path: '/',
+            path: '/profile/:id?',
             name: 'profile',
             component: Profile
         },

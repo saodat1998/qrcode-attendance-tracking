@@ -5,7 +5,7 @@
         </b-alert>
         <b-container class="pr-5">
 
-            <form action="/select" @submit.prevent="check" class=" justify-content-center login" >
+            <form @submit.prevent="check" class=" justify-content-center login" >
                 <fieldset>
                   <div class="input">
                       <label class="form-check-label" for="name">ID</label>
@@ -55,7 +55,7 @@
                     for(let i=0; i<items.length; i++){
                         if((this.user === items[i].id) && (this.password === items[i].password)){
                                 this.error = false;
-                                this.$router.replace(this.$route.query.redirect || '/select');
+                                this.$router.replace(this.$route.query.redirect || '/profile/'+ items[i].id +'');
                                 return 0;
                         }
                         else{

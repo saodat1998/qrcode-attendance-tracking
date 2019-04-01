@@ -2,9 +2,9 @@
     <div>
         <b-container fluid>
             <b-row>
-                <b-col md="6">
+                <b-col md="8" style="text-align: left">
             <b-row class="pt-5">
-                <b-col md="4">Course</b-col>
+                <b-col md="4">ClassType</b-col>
                 <b-col>
                     <b-form-select
                             v-model="selected[0]"
@@ -34,7 +34,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col md="4">Group</b-col>
+                <b-col md="4">Week</b-col>
                 <b-col>
                     <b-form-select
                             v-model="selected[3]"
@@ -60,7 +60,7 @@
             </b-col>
             </b-row>
             <b-row>
-                <b-col md="3">
+                <b-col md="4">
                     <b-button @click="sendSelected">create QRcode</b-button>
                 </b-col>
             </b-row>
@@ -77,16 +77,15 @@
 
 
     export default {
-        name: "Right",
+        name: "Select",
 
         data() {
             return {
                 details: details,
                 optionsC: [
-                    { value: '1', text: 'Freshman' },
-                    { value: '2', text: 'Sophomore' },
-                    { value: '3', text: 'Junior' },
-                    { value: '4', text: 'Seior' }
+                    { value: 'Lec', text: 'Lecture' },
+                    { value: 'Lab', text: 'Lab' },
+                    { value: 'Tt', text: 'Tutorial' },
                 ],
                 selected: [],
                 options: [
@@ -101,10 +100,14 @@
                     { value: '004', text: '004' }
                 ],
                 optionsG: [
-                    { value: '17-1', text: 'CSE-17-1' },
-                    { value: '17-2', text: 'CSE-17-2' },
-                    { value: '17-3', text: 'CSE-17-3' },
-                    { value: '17-4', text: 'CSE-17-4' }
+                    { value: '1', text: 'week-1' },
+                    { value: '2', text: 'week-2' },
+                    { value: '3', text: 'week-3' },
+                    { value: '4', text: 'week-4' },
+                    { value: '5', text: 'week-5' },
+                    { value: '6', text: 'week-6' },
+                    { value: '7', text: 'week-7' },
+                    { value: '8', text: 'week-8' }
                 ],
                 fields: [
                     {key: 'subject', label: "Short information"},

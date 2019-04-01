@@ -5,68 +5,80 @@
         </b-alert>
         <b-container class="pr-5">
 
-            <form @submit.prevent="check" class=" justify-content-center login" >
+            <form @submit.prevent="check" v-if="!logged" class=" justify-content-center login" >
                 <fieldset>
-                  <div class="input">
-                      <label class="form-check-label" for="name">ID</label>
+                    <div class="input">
+                        <label class="form-check-label" for="name">ID</label>
                         <input type="text" required :v-bind="user" v-model="user" id="name"/>
                         <span class="tiny"><font-awesome-icon icon="user"/></span>
-                  </div>
-                  <div class="input">
-                      <label class="form-check-label" for="password">Password</label>
-                    <input type="password" :v-bind="password" v-model="password" id="password"/>
-                    <span class="tiny"><font-awesome-icon icon="eye"/></span>
-                  </div>
+                    </div>
+                    <div class="input">
+                        <label class="form-check-label" for="password">Password</label>
+                        <input type="password" :v-bind="password" v-model="password" id="password"/>
+                        <span class="tiny"><font-awesome-icon icon="eye"/></span>
+                    </div>
                     <button type="submit" class="submit"><font-awesome-icon icon="arrow-right"/></button>
                 </fieldset>
             </form>
 
-                    </b-container>
+            <form @submit.prevent="check" v-if="logged" class="justify-content-center login" >
+                <fieldset>
+                    <div class="input">
+                        <label class="form-check-label" for="name2">ID</label>
+                        <input type="text" required :v-bind="name" v-model="name" id="name2"/>
+                        <span class="tiny"><font-awesome-icon icon="user"/></span>
+                    </div>
 
-           </div>
+                    <button type="submit" class="submit"><font-awesome-icon icon="arrow-left"/></button>
+                </fieldset>
+            </form>
+
+        </b-container>
+
+    </div>
 </template>
 
 <script>
     import { db } from '../db';
     import 'firebase/database';
-
     export default {
         name: "Login",
-            data() {
-                return {
-                    user: null,
-                    password: null,
-                    items:[],
-                    error: false,
-                    some: 0,
-                }
+        data() {
+            return {
+                user: null,
+                password: null,
+                name: null,
+                items:[],
+                error: false,
+                some: 0,
+                logged: false,
+            }
+        },
+        firebase: {
+            items: db.ref('users')
+        },
+        methods: {
+            onSubmit(evt) {
+                evt.preventDefault();
+                alert(JSON.stringify(this.form));
             },
-
-            firebase: {
-                items: db.ref('users')
-            },
-            methods: {
-                onSubmit(evt) {
-                    evt.preventDefault();
-                    alert(JSON.stringify(this.form));
-                },
-                check(){
-                    let items = this.items;
-                    for(let i=0; i<items.length; i++){
-                        if((this.user === items[i].id) && (this.password === items[i].password)){
-                                this.error = false;
-                                this.$router.replace(this.$route.query.redirect || '/profile/'+ items[i].id +'');
-                                return 0;
-                        }
-                        else{
-                            this.error = true;
-                        }
+            check(){
+                let items = this.items;
+                for(let i=0; i<items.length; i++){
+                    if((this.user === items[i].id) && (this.password === items[i].password)){
+                        this.name = items[i].name;
+                        this.error = false;
+                        this.logged = true;
+                        this.$router.replace(this.$route.query.redirect || '/profile/'+ i + '');
+                        return 0;
                     }
-
+                    else{
+                        this.error = true;
+                    }
                 }
-
             }
         }
+    }
 </script>
 
 <style scoped>
@@ -77,8 +89,7 @@
         font-size: 12px;
         color: red;
         border: none;
-
-        }
+    }
     ::placeholder {
         color: white;
     }
@@ -111,7 +122,6 @@
         top: 36px;
         font-size: 14px;
     }
-
     input{
         width: 100%;
         padding-left: 30px;
@@ -123,11 +133,9 @@
         color: #fff;
         background-color: transparent;
     }
-
     input:focus{
         outline: none;
     }
-
     .submit{
         width: 45px;
         height: 45px;
@@ -141,7 +149,6 @@
         box-shadow: 0 0 0 7px rgba(251, 249, 251, 0.22);
         transition: 0.2s ease-out;
         color: #2285ba;
-
     }
     #tiny .fa{
         display: block;
@@ -150,7 +157,6 @@
         margin-bottom: 0;
         bottom: -21px;
     }
-
     .submit:hover .fa-arrow-right {
         -webkit-animation-name: buzz-out;
         animation-name: buzz-out;
@@ -162,3 +168,4 @@
         animation-iteration-count: 1;
     }
 </style>
+

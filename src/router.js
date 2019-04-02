@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Timer from "./components/Timer";
-import Navbar from "./components/Navbar";
-import Login from "./components/Login";
 import Select from "./components/Select";
 import QrCode from "./components/QrCode";
 import Profile from "./components/Profile";
+import LastPage from "./components/LastPage";
 
 
 
@@ -16,9 +14,9 @@ export default new VueRouter({
     base: process.env.BASE_URL,
     routes: [
         {
-            path: '/nav',
-            name: 'navbar',
-            component: Navbar
+            path: '/last',
+            name: 'lastPage',
+            component: LastPage
         },
         {
             path: '/profile/:id?',

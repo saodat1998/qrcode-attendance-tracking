@@ -21,10 +21,10 @@
                 </fieldset>
             </form>
 
-            <form @submit.prevent="check" v-if="logged" class="justify-content-center login" >
+            <form @submit.prevent="check2" v-if="logged" class="justify-content-center login" >
                 <fieldset>
-                    <div class="input">
-                        <label class="form-check-label" for="name2">ID</label>
+                    <div class="input pb-5">
+                        <label class="form-check-label" for="name2">Professor</label>
                         <input type="text" required :v-bind="name" v-model="name" id="name2"/>
                         <span class="tiny"><font-awesome-icon icon="user"/></span>
                     </div>
@@ -69,19 +69,27 @@
                         this.name = items[i].name;
                         this.error = false;
                         this.logged = true;
-                        this.$router.replace(this.$route.query.redirect || '/profile/'+ i + '');
+                        this.$router.replace(this.$route.query.redirect || '/profile/' + i + '');
                         return 0;
                     }
                     else{
                         this.error = true;
                     }
                 }
+            },
+            check2(){
+                this.$router.replace(this.$route.query.redirect || '/last');
+                this.logged = false;
             }
+
         }
     }
 </script>
 
 <style scoped>
+    button:focus{
+        outline: none;
+    }
     .warn{
         position: absolute;
         left: 35%;
@@ -104,7 +112,7 @@
         left: 30%;
         width: 50%;
         display: table;
-        background: rgba(200,200, 200, 0.15);
+        /*background: rgba(200,200, 200, 0.15);*/
         border-radius: 1px;
     }
     .input{

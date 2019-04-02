@@ -1,11 +1,11 @@
 import Firebase from 'firebase'
 var config = {
-    apiKey: "AIzaSyDAsbVh0Tukp9UOjffbXTsWID3hPvte8Go",
-    authDomain: "summer-8033c.firebaseapp.com",
-    databaseURL: "https://summer-8033c.firebaseio.com",
-    projectId: "summer-8033c",
-    storageBucket: "summer-8033c.appspot.com",
-    messagingSenderId: "142179983291"
+        apiKey: "AIzaSyBhqoA_0w0zJ7zsItdzwAFLI06sr13q0Kc",
+        authDomain: "qrcode-cb458.firebaseapp.com",
+        databaseURL: "https://qrcode-cb458.firebaseio.com",
+        projectId: "qrcode-cb458",
+        storageBucket: "qrcode-cb458.appspot.com",
+        messagingSenderId: "454068512108"
 };
 
 let app = Firebase.initializeApp(config);

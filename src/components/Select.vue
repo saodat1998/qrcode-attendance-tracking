@@ -2,8 +2,8 @@
     <div>
         <b-container fluid>
             <b-row>
-                <b-col md="8" style="text-align: left">
-            <b-row class="pt-5">
+                <b-col md="12" style="text-align: left">
+            <b-row class="pt-2">
                 <b-col md="4">ClassType</b-col>
                 <b-col>
                     <b-form-select
@@ -18,7 +18,7 @@
                 <b-col>
                     <b-form-select
                             v-model="selected[1]"
-                            :options="options"
+                            :options="parentData"
                             class="mb-3 mySelect">
                     </b-form-select>
                 </b-col>
@@ -45,22 +45,22 @@
                 </b-col>
             </b-row>
                 </b-col>
-            <b-col md="4">
-                <div class="pt-5">
-                    <b-list-group>
-                        <b-list-group-item
-                                href="#"
-                                v-for="(value, key) in selected"
-                                :key="key"
-                        >
-                            {{value}}
-                        </b-list-group-item>
-                    </b-list-group>
-                </div>
-            </b-col>
+            <!--<b-col md="4">-->
+                <!--<div class="pt-5">-->
+                    <!--<b-list-group>-->
+                        <!--<b-list-group-item-->
+                                <!--href="#"-->
+                                <!--v-for="(value, key) in selected"-->
+                                <!--:key="key"-->
+                        <!--&gt;-->
+                            <!--{{value}}-->
+                        <!--</b-list-group-item>-->
+                    <!--</b-list-group>-->
+                <!--</div>-->
+            <!--</b-col>-->
             </b-row>
             <b-row>
-                <b-col md="4">
+                <b-col md="5" class="pt-5">
                     <b-button @click="sendSelected">create QRcode</b-button>
                 </b-col>
             </b-row>
@@ -115,6 +115,9 @@
                     ],
             }
         },
+        props: {
+            parentData: Object,
+        },
         methods:{
             sendSelected(){
                 this.$router.replace(this.$route.query.redirect || '/qrCode');
@@ -124,7 +127,7 @@
 </script>
 <style scoped>
     .mySelect{
-        background-color: rgba(204, 212, 247, 0.25);
+        background-color: rgba(255, 255, 255, 0.3);
         border-color: rgba(188, 193, 231, 0.67);
         color: #29008c;
     }

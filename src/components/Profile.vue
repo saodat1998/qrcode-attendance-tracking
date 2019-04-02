@@ -1,6 +1,6 @@
 <template>
     <b-row class="pt-5">
-        <b-col md="8">
+        <b-col md="6">
             <table class="border">
                 <thead>
                 <th>Profile</th>
@@ -27,7 +27,10 @@
                     </td>
                </tr>
             </table>
-        <Select></Select>
+
+        </b-col>
+        <b-col md="6">
+            <Select :parent-data="courses"></Select>
         </b-col>
 
     </b-row>
@@ -50,6 +53,7 @@
                 user: null,
                }
         },
+
         firebase: {
             items: db.ref('users')
         },
@@ -59,7 +63,6 @@
                 this.name = this.items.name;
                 this.user = this.items.id;
                 this.courses = this.items.courses;
-
             }
         },
         mounted(){

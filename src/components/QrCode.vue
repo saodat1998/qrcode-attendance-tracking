@@ -191,7 +191,7 @@
                     if(this.allow) {
                         this.value = val;
                         this.background = b;
-                        items.push(this.value);
+                        items.push({value: this.value});
                     }
                 }, 3000);
             },

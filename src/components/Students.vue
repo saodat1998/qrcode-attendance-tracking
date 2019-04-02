@@ -19,6 +19,7 @@
                         <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
                     </b-form-group>
                 </b-col>
+                <b-button @click="attendanceCheck">aaa</b-button>
             </b-row>
 
             <!-- Main table element -->
@@ -88,7 +89,7 @@
         },
         mounted(){
             this.totalRows = this.students.length;
-            this.attendanceCheck();
+            // this.attendanceCheck();
         },
         watch:{
 
@@ -109,11 +110,8 @@
                 this.currentPage = 1
             },
             attendanceCheck(){
-                console.log("inside");
                 let students = this.students;
-                console.log(students);
                 for(let i=0; i<students.length; i++){
-                    console.log(students[i].id);
                     if(this.qrSId(students[i].id)){
                         console.log("ura1")
                     }
@@ -123,9 +121,7 @@
                 let qrCodeFromStudent = this.qrCodeFromStudent;
                 for(let i=0; i<qrCodeFromStudent.length; i++){
                     if(qrCodeFromStudent[i].studentId === id){
-                        console.log("ura2");
                         if(this.qrGiven(qrCodeFromStudent[i].qrCode)) {
-                            console.log("ura3");
                             return true;
                         }
                     }
@@ -133,10 +129,8 @@
             },
             qrGiven(code){
                 let qrCode = this.qrCodeB;
-                console.log("ura4");
                 for(let i=0; i<qrCode.length; i++){
-                    console.log("ura5");
-                    if(qrCode.value === code){
+                    if(qrCode[i].value === code){
                         return true;
                     }
                 }

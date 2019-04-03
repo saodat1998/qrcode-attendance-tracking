@@ -7,8 +7,9 @@
                 content-class="myContent"
                 header-class="myHeader"
                 body-class="myBody"
+                hide-header = true
+                hide-footer = true
                 title="Please scan the given code"
-
                 ref="my-modal"
         >
         <b-row>
@@ -108,7 +109,7 @@
             <b-col md="12">
                 <Students></Students>
             </b-col>
-            <b-col md="12">
+            <b-col md="4" offset="8">
             <b-button
                     @click="showAttendance"
                     size="sm"
@@ -131,7 +132,6 @@
     import 'firebase/database';
     import Students from "./Students";
     const items = db.ref('qrCode');
-    const students = db.ref('qrCodeFromStudent');
     export default {
         name: 'QrCode',
 

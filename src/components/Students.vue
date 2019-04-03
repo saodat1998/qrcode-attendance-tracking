@@ -2,8 +2,8 @@
     <div>
         <b-container fluid>
             <!-- User Interface controls -->
-            <b-row>
-                <b-col md="6" class="my-1">
+            <b-row class="pb-3">
+                <b-col md="4" class="my-1">
                     <b-form-group class="mb-0">
                         <b-input-group>
                             <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
@@ -14,12 +14,14 @@
                     </b-form-group>
                 </b-col>
 
-                <b-col md="6" class="my-1">
-                    <b-form-group label-cols-sm="3" label="Per page" class="mb-0">
+                <b-col md="4" class="my-1">
+                    <b-form-group label-cols-sm="4" label="Per page" class="mb-0">
                         <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
                     </b-form-group>
                 </b-col>
-                <b-button @click="attendanceCheck">aaa</b-button>
+                <b-col md="4" class="my-1">
+                    <b-button @click="attendanceCheck">Refresh</b-button>
+                </b-col>
             </b-row>
 
             <!-- Main table element -->
@@ -53,9 +55,7 @@
 <script>
     import { db } from '../db';
     import 'firebase/database';
-    // const students = db.ref('students');
-    // const qrCode = db.ref('qrCode');
-    // const qrCodeFromStudent = db.ref('qrCodeFromStudent');
+    const students2 = db.ref('students');
     export default {
         name: "Students",
         data() {
@@ -64,34 +64,32 @@
                 fields: [
                     { key: 'id', label: 'ID', sortable: true, sortDirection: 'desc' },
                     { key: 'name', label: 'Name', sortable: true, class: 'text-center' },
-                    { key: 'week-1', label: 'week-1' },
-                    { key: 'week-2', label: 'week-2' },
-                    { key: 'week-3', label: 'week-3' },
-                    { key: 'week-4', label: 'week-4' },
-                    { key: 'week-5', label: 'week-5' },
-                    { key: 'week-6', label: 'week-6' },
-                    { key: 'week-7', label: 'week-7' },
-                    { key: 'week-8', label: 'week-8' },
+                    { key: 'week_1', label: 'week-1' },
+                    { key: 'week_2', label: 'week-2' },
+                    { key: 'week_3', label: 'week-3' },
+                    { key: 'week_4', label: 'week-4' },
+                    { key: 'week_5', label: 'week-5' },
+                    { key: 'week_6', label: 'week-6' },
+                    { key: 'week_7', label: 'week-7' },
+                    { key: 'week_8', label: 'week-8' },
                 ],
                 currentPage: 1,
                 perPage: 8,
                 totalRows: 0,
-                pageOptions: [8, 14, 35],
+                pageOptions: [4, 8, 10],
                 filter: null,
                 modalInfo: { title: '', content: '' }
             }
         },
         firebase: {
-            students: db.ref('students'),
+            students: students2,
             qrCodeB: db.ref('qrCode'),
             qrCodeFromStudent: db.ref('qrCodeFromStudent')
 
         },
         mounted(){
-            this.totalRows = this.students.length;
-            // this.attendanceCheck();
-        },
-        watch:{
+            this.totalRows = this.students.length-1;
+            this.attendanceCheck();
 
         },
         computed: {
@@ -101,7 +99,8 @@
                     .map(f => {
                         return { text: f.label, value: f.key }
                     })
-            }
+            },
+
         },
         methods: {
             onFiltered(filteredItems) {
@@ -110,10 +109,14 @@
                 this.currentPage = 1
             },
             attendanceCheck(){
+                this.totalRows = this.students.length-1;
                 let students = this.students;
                 for(let i=0; i<students.length; i++){
                     if(this.qrSId(students[i].id)){
-                        console.log("ura1")
+                        students2.child(i).update({week_2: '1'});
+
+                    }else{
+                        students2.child(i).update({week_2: '0'});
                     }
                 }
             },
